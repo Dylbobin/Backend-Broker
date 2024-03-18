@@ -1,6 +1,7 @@
 // Include packages
 const mongoose = require("mongoose");
 const express = require("express");
+const blogRoute = require("./routes/blogRoute")
 const adminRoute = require("./routes/adminRoute")
 const userRoute = require("./routes/userRoute")
 

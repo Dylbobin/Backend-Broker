@@ -1,7 +1,7 @@
 // Include packages
 const express = require("express");
 const router = express.Router();
-const Blog = require("../model/market");
+const Market = require("../model/market");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const blogRoute = require("./routes/marketRoute");
+const marketRoute = require("./routes/marketRoute");
+const brokerRoute = require("./routes/brokerRoute");
 const adminRoute = require("./routes/adminRoute");
 const userRoute = require("./routes/userRoute");
 require("dotenv").config();

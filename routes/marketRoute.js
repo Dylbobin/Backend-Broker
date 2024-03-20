@@ -2,11 +2,9 @@
 const express = require("express");
 const router = express.Router();
 const Market = require("../model/market");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 // post to app
-// tewo objects request and response
+// two objects request and response
 router.post("/", async (req, res) => {
     // for specific body JSON
     /* console.log(req.body) */
@@ -41,7 +39,7 @@ router.delete("/:id", async (req, res) => {
     try {
         //blogs find by id to delete
         // takes the given url and deletes by that exact block
-        const blogs = await Blog.findByIdAndDelete(req.params.id);
+        const stock = await Blog.findByIdAndDelete(req.params.id);
         if (!blog) {
             // not found if cannot find
             res.status(404).send();
@@ -58,7 +56,7 @@ router.patch("/:id", async (req, res) => {
     try {
         //blogs find by id to update blog
         // takes the given url and deletes by that exact block
-        const blogs = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+        const blogs = await Market.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
         });
         if (!blog) {
@@ -67,6 +65,67 @@ router.patch("/:id", async (req, res) => {
         }
         // if found
         res.status(200).send(blogs);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+// get /market: Get all stock information
+// get /market/{id}: Get information about a stock
+// post /market: post a stock
+// put /market/{id}: Update a stock's  information
+// delete /market/{id}: delete a stock
+
+router.get("/", async (req, res) => {
+    try {
+        const market = await Market.find({});
+        res.status(200).send(market);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+router.get("/:id", async (req, res) => {
+    try {
+        const market = await Market.findById(req.params.id);
+        if (!market) {
+            res.status(404).send();
+        }
+        res.status(200).send(market);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+router.post("/", async (req, res) => {
+    const market = new Market(req.body);
+    try {
+        await market.save();
+        res.status(201).send(market);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+router.put("/:id", async (req, res) => {
+    try {
+        const market = await Market.findByIdAndUpdate(req.params.id);
+        if (!market) {
+            res.status(404).send();
+        }
+        res.status(200).send(market);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+router.delete("/:id", async (req, res) => {
+    try {
+        const market = await Market.findByIdAndDelete(req.params.id);
+        if (!market) {
+            res.status(404).send();
+        }
+        res.status(200).send(market);
     } catch (error) {
         res.status(500).send(error);
     }

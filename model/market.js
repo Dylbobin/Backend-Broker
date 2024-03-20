@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const marketSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    industry: String,
+    stockName: { type: String, required: true },
     value: Number,
+    description: String,
     lastUpdated: { type: Date, default: Date.now },
 });
 

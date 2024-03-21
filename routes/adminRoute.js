@@ -1,9 +1,16 @@
+// Dylan Silva
+// CPSC 349
+// March 20th, 2024
+// Backend Broker
+
 // Include packages
 const express = require("express");
 const router = express.Router();
 const Admin = require("../model/admin");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+/*-------------------------------------- Login/Register -------------------------------------- */
 
 // register admin
 router.post("/register", async (req, res) => {
@@ -44,13 +51,101 @@ router.post("/login", async (req, res) => {
                 email: admin.email,
             },
             // unique value in order to encrypt password
-            "secret@123"
+            "BackEndBroker@123"
         );
         // return the user token - we can take this token and store it on the browser
-        return res.json({ status: "ok", admin: token });
+        return res.json({ status: "ok", admin: token, id: admin._id });
     } else {
         return res.json({ status: "error", admin: false });
     }
 });
 
+/*-------------------------------------- PATCH -------------------------------------- */
+
+// patch in order to update
+router.patch("/:id", async (req, res) => {
+    try {
+        // find stock by id to update post
+        // takes the given url and deletes by that exact block
+        const stcok = await Stock.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
+        if (!stock) {
+            // not found if cannot find
+            res.status(404).send();
+        }
+        // if found
+        res.status(200).send(stock);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+/*-------------------------------------- DELETE USER, STOCK, BROKER -------------------------------------- */
+
+// we want to preform a singular delete at a time for the admin
+router.delete("/delete", async (req, res) => {
+    try {
+        // find by id to delete
+        // takes the given id and deletes by that exact block
+        // take the id from the req body, provided after login
+        const id = req.body.id;
+        const admin = await Admin.findByIdAndDelete(id);
+        if (!admin) {
+            // not found if cannot find
+            res.status(404).send();
+        }
+        // if found
+        res.status(200).send("Admin deleted from the database");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+// we want to preform a singular delete at a time for user
+router.delete("/delete/user", async (req, res) => {
+    try {
+        // find by id to delete
+        // takes the given id and deletes by that exact block
+        // take the id from the req body, provided after login
+        const id = req.body.id;
+        const user = await User.findByIdAndDelete(id);
+        if (!user) {
+            // not found if cannot find
+            res.status(404).send();
+        }
+        // if found
+        res.status(200).send("User deleted from the database");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+// we want to preform a singular delete at a time for user
+router.delete("/delete/broker", async (req, res) => {
+    try {
+        // find by id to delete
+        // takes the given id and deletes by that exact block
+        // take the id from the req body, provided after login
+        const id = req.body.id;
+        const broker = await Broker.findByIdAndDelete(id);
+        if (!broker) {
+            // not found if cannot find
+            res.status(404).send();
+        }
+        // if found
+        res.status(200).send("User deleted from the database");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+/*-------------------------------------- END -------------------------------------- */
+
 module.exports = router;
+
+
+// Dylan Silva
+// CPSC 349
+// March 20th, 2024
+// Backend Broker

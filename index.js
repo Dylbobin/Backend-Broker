@@ -4,6 +4,7 @@ const marketRoute = require("./routes/marketRoute");
 const brokerRoute = require("./routes/brokerRoute");
 const adminRoute = require("./routes/adminRoute");
 const userRoute = require("./routes/userRoute");
+const transactionRoute = require("./routes/transactionRoute")
 require("dotenv").config();
 
 const dbURI = process.env.MONGODB_URL;
@@ -26,3 +27,4 @@ app.use("/market", marketRoute);
 app.use("/api/broker", brokerRoute);
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/transaction", transactionRoute);

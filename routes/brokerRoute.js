@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const brokerController = require('../controllers/brokerController');
-const brokerRoute = require('./routes/brokerRoute');
+const broker = require("../model/broker");
 
 router.post('/register', brokerController.registerBroker);
 router.post('/login', brokerController.loginBroker);

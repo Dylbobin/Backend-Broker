@@ -3,12 +3,6 @@ const express = require("express");
 const router = express.Router();
 const Market = require("../model/market");
 
-// get /market: Get all stock information
-// get /market/{id}: Get information about a stock
-// post /market: post a stock
-// put /market/{id}: Update a stock's  information
-// delete /market/{id}: delete a stock
-
 // Get all stock information
 router.get("/", async (req, res) => {
     try {

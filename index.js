@@ -4,6 +4,7 @@ const express = require("express");
 const blogRoute = require("./routes/blogRoute");
 const adminRoute = require("./routes/adminRoute");
 const userRoute = require("./routes/userRoute");
+const brokerRoute = require('./routes/brokerRoute');
 require("dotenv").config();
 
 // Initialize express app
@@ -31,6 +32,7 @@ mongoose
 app.use("/blogs", blogRoute);
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
+app.use('/api/broker', brokerRoute);
 
 // Optional: Define a root route
 app.get('/', (req, res) => {

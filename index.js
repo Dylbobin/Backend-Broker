@@ -24,7 +24,7 @@ mongoose
     .catch((error) => console.error(error));
 
 app.use("/market", marketRoute);
-app.use("/api/broker", brokerRoute);
+// app.use("/api/broker", brokerRoute);
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/transaction", transactionRoute);

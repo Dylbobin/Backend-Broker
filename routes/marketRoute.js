@@ -9,6 +9,7 @@ const Market = require("../model/market");
 // put /market/{id}: Update a stock's  information
 // delete /market/{id}: delete a stock
 
+// Get all stock information
 router.get("/", async (req, res) => {
     try {
         const market = await Market.find({});
@@ -18,6 +19,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+// Get information about a specific stock by ID
 router.get("/:id", async (req, res) => {
     try {
         const market = await Market.findById(req.params.id);
@@ -25,7 +27,7 @@ router.get("/:id", async (req, res) => {
             res.status(404).send();
         }
         console.log(
-            `This is stock ${market.stockName}\n with a value of ${market.value}. Here is the description: ${market.description} and was last updated on ${market.lastUpdated}`
+            `This is stock ${market.stockName} with a value of ${market.value}. Here is the description: ${market.description} and was last updated on ${market.lastUpdated}`
         );
         res.status(200).send(market);
     } catch (error) {
@@ -33,6 +35,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// Post a stock
 router.post("/", async (req, res) => {
     const { stockName, value, description } = req.body;
     const market = new Market({
@@ -42,15 +45,19 @@ router.post("/", async (req, res) => {
     });
     try {
         await market.save();
-        res.status(201).send(market);
+        res.status(201).send({ market, id: market.id });
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
-router.put("/:id", async (req, res) => {
+// Update a stock's information by ID
+router.patch("/:id", async (req, res) => {
     try {
-        const market = await Market.findByIdAndUpdate(req.params.id);
+        const market = await Market.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
         if (!market) {
             res.status(404).send();
         }
@@ -60,6 +67,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+// Delete a stock by ID
 router.delete("/:id", async (req, res) => {
     try {
         const market = await Market.findByIdAndDelete(req.params.id);

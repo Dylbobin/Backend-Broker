@@ -64,7 +64,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // resetting the user's password
-router.put("/user/resetPassword", async (req, res) => {
+router.put("/resetPassword", async (req, res) => {
   // Extract the JWT from the Authorization header
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -100,7 +100,7 @@ router.put("/user/resetPassword", async (req, res) => {
 });
 
 //changing the user's email
-router.patch("/user/changeEmail", async (req, res) => {
+router.patch("/changeEmail", async (req, res) => {
   // Similar structure to the previous route
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -133,7 +133,7 @@ router.patch("/user/changeEmail", async (req, res) => {
 });
 
 //retrieving the user's stocks
-router.get("/user/stocks", async (req, res) => {
+router.get("/stocks", async (req, res) => {
   // Similar structure to the previous routes
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];

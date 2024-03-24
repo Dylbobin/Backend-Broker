@@ -1,3 +1,12 @@
+/*
+ * File: marketRoute.js
+ * Author: Edison Chung
+ * Date: 3/22/24
+ * Description: Defines the routes for the market collection, that manages the stock information.
+ *             This file contains the routes for getting all stock information, getting stock information by ID, posting a stock, updating a stock by ID, 
+ *             and deleting a stock by ID.
+ */
+
 // Include packages
 const express = require("express");
 const router = express.Router();

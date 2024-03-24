@@ -1,3 +1,9 @@
+/*
+ * File: userRoute.js
+ * Author: Andres Gallego
+ * Description: HTTP requests to register and login a user, reset a user's password, change a user's email, and retrieve a user's stocks.
+*/
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -12,6 +18,7 @@ router.post("/register", async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: newPassword,
+      stocks: req.body.stocks,
     });
     res.status(200).send("User added to database");
   } catch (error) {

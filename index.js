@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const marketRoute = require("./routes/marketRoute");
-const brokerRoute = require("./routes/brokerRoute");
 const adminRoute = require("./routes/adminRoute");
-const userRoute = require("./routes/userRoute");
+const brokerRoute = require("./routes/brokerRoute");
+const marketRoute = require("./routes/marketRoute");
 const transactionRoute = require("./routes/transactionRoute");
+const userRoute = require("./routes/userRoute");
 require("dotenv").config();
 
 const dbURI = process.env.MONGODB_URL;
@@ -23,8 +23,8 @@ mongoose
   )
   .catch((error) => console.error(error));
 
-app.use("/market", marketRoute);
-// app.use("/api/broker", brokerRoute);
-app.use("/api/user", userRoute);
-app.use("/api/admin", adminRoute);
-app.use("/api/transaction", transactionRoute);
+  app.use("/api/admin", adminRoute);
+  app.use("/api/broker", brokerRoute);
+  app.use("/api/market", marketRoute);
+  app.use("/api/transaction", transactionRoute);
+  app.use("/api/user", userRoute);

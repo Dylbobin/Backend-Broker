@@ -1,7 +1,8 @@
-// Dylan Silva
-// CPSC 349
-// March 20th, 2024
-// Backend Broker
+/*
+ * File: adminRoute.js
+ * Author: Dylan Silva\
+ * Description: HTTP requests to register and login an admin, update an admin by ID, and delete an admin by ID.
+ */
 
 // Include packages
 const express = require("express");
@@ -67,7 +68,7 @@ router.patch("/:id", async (req, res) => {
     try {
         // find stock by id to update post
         // takes the given url and deletes by that exact block
-        const stcok = await Stock.findByIdAndUpdate(req.params.id, req.body, {
+        const stock = await Stock.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
         });
         if (!stock) {
@@ -84,13 +85,12 @@ router.patch("/:id", async (req, res) => {
 /*-------------------------------------- DELETE USER, STOCK, BROKER -------------------------------------- */
 
 // we want to preform a singular delete at a time for the admin
-router.delete("/delete", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
     try {
         // find by id to delete
         // takes the given id and deletes by that exact block
         // take the id from the req body, provided after login
-        const id = req.body.id;
-        const admin = await Admin.findByIdAndDelete(id);
+        const admin = await Admin.findByIdAndDelete(req.params.id);
         if (!admin) {
             // not found if cannot find
             res.status(404).send();
@@ -143,9 +143,3 @@ router.delete("/delete/broker", async (req, res) => {
 /*-------------------------------------- END -------------------------------------- */
 
 module.exports = router;
-
-
-// Dylan Silva
-// CPSC 349
-// March 20th, 2024
-// Backend Broker

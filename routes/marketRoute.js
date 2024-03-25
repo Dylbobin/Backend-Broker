@@ -1,8 +1,7 @@
 /*
  * File: marketRoute.js
  * Author: Edison Chung
- * Description: HTTP requests to getting all stock information, getting stock information by ID, posting a stock, updating a stock by ID,
- *             and deleting a stock by ID.
+ * Description: HTTP requests to getting all stock information, getting stock information by ID, posting a stock, updating a stock by ID, and deleting a stock by ID.
  */
 
 // Include packages

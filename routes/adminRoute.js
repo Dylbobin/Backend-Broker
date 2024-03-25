@@ -1,6 +1,6 @@
 /*
  * File: adminRoute.js
- * Author: Dylan Silva\
+ * Author: Dylan Silva
  * Description: HTTP requests to register and login an admin, update an admin by ID, and delete an admin by ID.
  */
 
